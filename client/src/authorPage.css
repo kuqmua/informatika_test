@@ -1,0 +1,11 @@
+.things {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+.desc {
+  width: 400px;
+}
