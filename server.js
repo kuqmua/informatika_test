@@ -3,15 +3,14 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors());
-
+app.use(express.static("public"));
 const port = 8888;
-
-app.get("/", function (req, res) {
-  res.send("Привет из Express");
-});
 
 app.listen(port, () => {
   console.log("сервер запустился на port", port);
+});
+app.get("/", function (req, res) {
+  res.send("Привет из Expresssss");
 });
 
 app.get("/privet", (req, res) => {
@@ -43,44 +42,64 @@ app.get("/table", (req, res) => {
   res.json(table);
 });
 
-app.get("/authors", (req, res) => {
-  const table = {
-    id: 0,
-    author: "Михаил Булгаков",
-    dateOfBirth: "15 мая 1891",
-    dateOfDeath: "10 марта 1940",
-    imgUrl:
-      "https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1RkJocEH2XAirMFqxE9vwZJkKaKTM5SRkZCeTgDn6uOyic",
-  };
-  res.json(table);
-});
-/*
-
- const table = [
+app.get("/author/:id", (req, res) => {
+  const authors = [
     {
       id: 0,
       author: "Михаил Булгаков",
       dateOfBirth: "15 мая 1891",
       dateOfDeath: "10 марта 1940",
-      imgUrl:
-      "https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1RkJocEH2XAirMFqxE9vwZJkKaKTM5SRkZCeTgDn6uOyic",
+      imgUrl: "http://localhost:8888/bulgakov.webp",
     },
     {
       id: 1,
       author: "Федор Достоевский",
       dateOfBirth: "11 ноября 1821",
       dateOfDeath: "9 февраля 1881",
-      imgUrl:
-      "https://starsity.ru/wp-content/uploads/2019/12/08021103-378x480.jpg",
+      imgUrl: "http://localhost:8888/dostoevski.jpg",
     },
     {
       id: 2,
       author: "Николай Гоголь",
       dateOfBirth: "9 февраля 1881",
       dateOfDeath: "4 марта 1852",
-      imgUrl:
-      "https://pbs.twimg.com/media/EYso5MTX0AErnyv.jpg",
+      imgUrl: "http://localhost:8888/gogol.jpg",
     },
   ];
+  res.json(authors[req.params.id]);
+});
 
+/*
+app.get("/author/0", (req, res) => {
+  const author = {
+    id: 0,
+    author: "Михаил Булгаков",
+    dateOfBirth: "15 мая 1891",
+    dateOfDeath: "10 марта 1940",
+    imgUrl: "http://localhost:8888/bulgakov.webp",
+  };
+  res.json(author);
+});
+
+app.get("/author/1", (req, res) => {
+  const author = {
+    id: 1,
+    author: "Федор Достоевский",
+    dateOfBirth: "11 ноября 1821",
+    dateOfDeath: "9 февраля 1881",
+    imgUrl: "http://localhost:8888/dostoevski.jpg",
+  };
+  res.json(author);
+});
+
+app.get("/author/2", (req, res) => {
+  author = {
+    id: 2,
+    author: "Николай Гоголь",
+    dateOfBirth: "9 февраля 1881",
+    dateOfDeath: "4 марта 1852",
+    imgUrl: "http://localhost:8888/gogol.jpg",
+  };
+  res.json(author);
+});
 */

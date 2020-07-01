@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Table } from "antd";
 import Privet from "./privet.js";
-//import { Link } from "react-router-dom";
+//import AuthorPage from "./authorPage.js";
+import { Link } from "react-router-dom";
+//import { browserHistory } from "react-router";
 //import AuthorPage from "./authorPage.js";
 
 class TableInfo extends Component {
@@ -61,10 +63,21 @@ class TableInfo extends Component {
           onRow={(record, rowIndex) => {
             return {
               onClick: (event) => {
-                console.log("sdfsd");
+                /*
+                this.context.router.transitionTo(
+                  "http://localhost:3000/author/" + rowIndex
+                );
+                */
+                /*
+                browserHistory.push(
+                  "http://localhost:3000/author/" + rowIndex
+                );
+                */
                 window.location =
                   "http://localhost:3000/author/" + rowIndex;
-              }, // click row
+              },
+
+              // click row
               onDoubleClick: (event) => {}, // double click row
               onContextMenu: (event) => {}, // right button click row
               onMouseEnter: (event) => {}, // mouse enter row
@@ -77,6 +90,9 @@ class TableInfo extends Component {
             };
           }}
         />
+        <Link to="/author/0">0 author</Link>
+        <Link to="/author/1">1 author</Link>
+        <Link to="/author/2">2 author</Link>
       </div>
     );
   }
@@ -88,4 +104,102 @@ return (
                   <Link to="/author/1" className="btn btn-primary" />
                 </div>
               );
+
+
+// userId will be Array index + 1
+const UsersPage = () => {
+  return (
+    <React.Fragment>
+      <h3>Users Page</h3>
+      {users.map((user, index) => (
+        <h5 key={index}>
+          <Link to={`/user/${index + 1}`}>{user.name}'s Page</Link>
+        </h5>
+      ))}
+    </React.Fragment>
+  );
+};
+
+////
+
+/*
+import React from "react";
+import {
+  Link,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
+import "./App.css";
+
+const users = [
+  {
+    name: `Param`,
+  },
+  {
+    name: `Vennila`,
+  },
+  {
+    name: `Afrin`,
+  },
+];
+
+const IndexPage = () => {
+  return <h3>Home Page</h3>;
+};
+
+const UsersPage = () => {
+  return (
+    <>
+      {users.map((user, index) => (
+        <h5 key={index}>
+          <Link to={`/user/${index + 1}`}>{user.name}'s Page</Link>
+        </h5>
+      ))}
+    </>
+  );
+};
+
+const UserPage = ({ match, location }) => {
+  const {
+    params: { userId },
+  } = match;
+
+  return (
+    <>
+      <p>
+        <strong>User ID: </strong>
+        {userId}
+      </p>
+      <p>
+        <strong>User Name: </strong>
+        {users[userId - 1].name}
+      </p>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <section className="App">
+      <Router>
+          <Link to="/users">Users</Link>
+        <Switch>
+          <Route exact path="/" component={IndexPage} />
+          <Route exact path="/users" component={UsersPage} />
+          <Route exact path="/user/:userId" component={UserPage} />
+        </Switch>
+      </Router>
+    </section>
+  );
+};
+
+export default App;
+
+
+(
+                <Link to="/author/0">
+                  <AuthorPage />
+                </Link>
+              ),
 */
